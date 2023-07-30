@@ -1,0 +1,6 @@
+{
+  "name": "eslint-plugin-eslint-custom-rules",
+	"version": "1.0.0",
+	"description": "Дополнительные правила eslint",
+	"main": "index.js"
+}

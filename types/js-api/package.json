@@ -1,0 +1,6 @@
+{
+  "name": "@types/js-api",
+	"version": "0.0.1",
+	"description": "Types for js-api SMP",
+	"main": "index.d.ts"
+}

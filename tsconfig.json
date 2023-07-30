@@ -1,0 +1,57 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "jsx": "react",
+    "target": "es5",
+    "module": "commonjs",
+    "allowJs": true,
+    "sourceMap": true,
+    "outDir": "./build",
+    "strict": true,
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "typeRoots": [
+      "node_modules/@types",
+      "types.d.ts"
+    ],
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "actions": [
+        "actions"
+      ],
+      "components": [
+        "components"
+      ],
+      "constants": [
+        "constants"
+      ],
+      "init": [
+        "init"
+      ],
+      "reducers": [
+        "reducers"
+      ],
+      "store": [
+        "store"
+      ],
+      "types": [
+        "types"
+      ],
+      "api": [
+        "api"
+      ],
+      "stubs": [
+        "stubs"
+      ],
+      "hooks": [
+        "hooks"
+      ]
+    }
+  }
+}

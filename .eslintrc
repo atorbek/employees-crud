@@ -1,0 +1,116 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "standard",
+    "plugin:react/recommended",
+    "plugin:promise/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "eslint-custom-rules",
+    "react",
+    "standard",
+    "promise",
+    "react-hooks"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "brace-style": [
+      "error",
+      "1tbs"
+    ],
+    "comma-dangle": [
+      "error",
+      "never"
+    ],
+    "curly": [
+      "error",
+      "all"
+    ],
+    "eslint-custom-rules/sort-class-methods": "error",
+    "eslint-custom-rules/sort-imports": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "@typescript-eslint/indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "multiline-ternary": [
+      "error",
+      "always-multiline"
+    ],
+    "no-extend-native": [
+      "error",
+      {
+        "exceptions": [
+          "String"
+        ]
+      }
+    ],
+    "no-param-reassign": "error",
+    "no-tabs": 0,
+    "object-curly-spacing": [
+      "error",
+      "never"
+    ],
+    "operator-linebreak": [
+      "error",
+      "before"
+    ],
+    "quote-props": [
+      "error",
+      "consistent"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "react/jsx-first-prop-new-line": [
+      1,
+      "multiline"
+    ],
+    "react/jsx-max-props-per-line": [
+      1,
+      {
+        "maximum": 1
+      }
+    ],
+    "react/jsx-sort-props": [
+      2,
+      {
+        "callbacksLast": true,
+        "shorthandLast": true,
+        "ignoreCase": false,
+        "noSortAlphabetically": false,
+        "reservedFirst": [
+          "key"
+        ]
+      }
+    ],
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": [
+      "error"
+    ]
+  }
+}
