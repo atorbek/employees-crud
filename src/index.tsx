@@ -1,19 +1,22 @@
 import App from 'components/App';
-import configureStore from 'store';
-import {defaultGetState} from 'actions/common';
+import {ChakraProvider} from '@chakra-ui/react';
+import Fonts from 'components/Fonts';
 import {Provider} from 'react-redux';
 import React from 'react';
-import {render} from 'react-dom';
+import configureStore from 'store';
+import {createRoot} from 'react-dom/client';
+import {defaultGetState} from 'actions/common';
+import theme from './theme';
 
-const root = document.getElementById('root');
+const container = document.getElementById('root');
+const root = createRoot(container!);
+const store = configureStore(defaultGetState());
 
-if (root) {
-  const store = configureStore(defaultGetState());
-
-  render(
-    <Provider store={store}>
-      <App/>
-    </Provider>,
-    root
-  );
-}
+root.render(
+  <Provider store={store}>
+    <ChakraProvider theme={theme}>
+      <Fonts />
+      <App />
+    </ChakraProvider>
+  </Provider>
+);

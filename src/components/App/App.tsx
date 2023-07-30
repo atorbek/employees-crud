@@ -1,55 +1,38 @@
+import {Center, Spinner} from '@chakra-ui/react';
 import React, {FC} from 'react';
+import Table from 'components/Table';
 import useAppData from 'hooks/useAppData';
 
 const App: FC = () => {
   const employees = useAppData();
 
-  const renderRow = (employeeId: string) => {
-    const employee = employees.entities[employeeId];
-
-    return (
-      <tr key={employeeId}>
-        {Object.keys(employee).map((prop, i) => <td key={i}>{employee[prop]}</td>)}
-      </tr>
-    );
-  };
-
-  const renderHead = () => {
-    const employee = employees.entities[0];
-
-    if (employee) {
-      return Object.keys(employee[0])
-        .map((prop, i) => <th key={i}>{prop}</th>);
-    }
-  };
-
-  const renderBody = () => {
-    return employees.ids.map(renderRow);
-  };
-
   if (employees.status === 'reject') {
-    return <>Что-то пошло не так...</>;
+    return (
+      <Center h='100px'>
+        Что-то пошло не так...
+      </Center>
+    );
   }
 
   if (employees.status === 'loading') {
-    return <>Загрузка пользователей...</>;
+    return (
+      <Center h='100px'>
+        <Spinner size='md' />
+      </Center>
+    )
+    ;
   }
 
   if (!employees.ids.length) {
-    return <>Список пользователей пустой</>;
+    return (
+      <Center h='100px'>
+        <Spinner size='md' />
+      </Center>
+    );
   }
 
   return (
-    <div>
-      <table>
-        <thead>
-          <tr>{renderHead()}</tr>
-        </thead>
-        <tbody>
-          {renderBody()}
-        </tbody>
-      </table>
-    </div>
+    <Table employees={employees}/>
   );
 };
 

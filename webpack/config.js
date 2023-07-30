@@ -12,7 +12,7 @@ module.exports = {
   },
   devtool: 'source-map',
   entry: {
-    'index': ['whatwg-fetch', './src/index.tsx']
+    'index': ['./src/index.tsx']
   },
   mode: define.mode,
   module: loaders,

@@ -14,7 +14,6 @@
   "parser": "@typescript-eslint/parser",
   "plugins": [
     "@typescript-eslint",
-    "eslint-custom-rules",
     "react",
     "standard",
     "promise",
@@ -26,20 +25,9 @@
     }
   },
   "rules": {
-    "brace-style": [
-      "error",
-      "1tbs"
-    ],
-    "comma-dangle": [
-      "error",
-      "never"
-    ],
-    "curly": [
-      "error",
-      "all"
-    ],
-    "eslint-custom-rules/sort-class-methods": "error",
-    "eslint-custom-rules/sort-imports": "error",
+    "brace-style": ["error", "1tbs"],
+    "comma-dangle": ["error", "never"],
+    "curly": ["error", "all"],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "indent": [
@@ -56,40 +44,20 @@
         "SwitchCase": 1
       }
     ],
-    "multiline-ternary": [
-      "error",
-      "always-multiline"
-    ],
+    "multiline-ternary": ["error", "always-multiline"],
     "no-extend-native": [
       "error",
       {
-        "exceptions": [
-          "String"
-        ]
+        "exceptions": ["String"]
       }
     ],
     "no-param-reassign": "error",
     "no-tabs": 0,
-    "object-curly-spacing": [
-      "error",
-      "never"
-    ],
-    "operator-linebreak": [
-      "error",
-      "before"
-    ],
-    "quote-props": [
-      "error",
-      "consistent"
-    ],
-    "semi": [
-      "error",
-      "always"
-    ],
-    "react/jsx-first-prop-new-line": [
-      1,
-      "multiline"
-    ],
+    "object-curly-spacing": ["error", "never"],
+    "operator-linebreak": ["error", "before"],
+    "quote-props": ["error", "consistent"],
+    "semi": ["error", "always"],
+    "react/jsx-first-prop-new-line": [1, "multiline"],
     "react/jsx-max-props-per-line": [
       1,
       {
@@ -103,14 +71,20 @@
         "shorthandLast": true,
         "ignoreCase": false,
         "noSortAlphabetically": false,
-        "reservedFirst": [
-          "key"
-        ]
+        "reservedFirst": ["key"]
+      }
+    ],
+    "sort-imports": [
+      "error",
+      {
+        "ignoreCase": false,
+        "ignoreDeclarationSort": false,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
+        "allowSeparatedGroups": false
       }
     ],
     "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": [
-      "error"
-    ]
+    "@typescript-eslint/no-use-before-define": ["error"]
   }
 }
