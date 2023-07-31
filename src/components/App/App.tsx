@@ -1,4 +1,13 @@
-import {Button, Center, HStack, Icon, IconButton, Input, Spinner, Stack, VStack} from '@chakra-ui/react';
+import {
+  Center,
+  HStack,
+  Icon,
+  IconButton,
+  Input,
+  Spinner,
+  Tooltip,
+  VStack
+} from '@chakra-ui/react';
 import React, {FC} from 'react';
 import Table from 'components/Table';
 import useAppData from 'hooks/useAppData';
@@ -39,7 +48,8 @@ const App: FC = () => {
     spacing={4}
     align='center'
     >
-      <HStack spacing={4}>
+      <HStack spacing={2}>
+        <Tooltip label='Add employee'>
         <IconButton
           isRound={true}
           size='sm'
@@ -49,7 +59,8 @@ const App: FC = () => {
           colorScheme="green"
           icon={<Icon as={IoIosAdd} />}
         />
-        <Input placeholder='Basic usage' size="sm" borderRadius="full" />
+        </Tooltip>
+        <Input placeholder='Search by name' size="sm" borderRadius="full" />
       </HStack>
       <Table employees={employees} />
     </VStack>

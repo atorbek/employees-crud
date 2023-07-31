@@ -1,7 +1,7 @@
-import api from 'api';
-import {createAsyncThunk} from '@reduxjs/toolkit';
 import {Employee, Employees} from 'types/employees';
 import {MESSAGE_ERROR} from 'reducers/employeeSlice';
+import api from 'api';
+import {createAsyncThunk} from '@reduxjs/toolkit';
 
 export type ResponseError = {
   status: number;

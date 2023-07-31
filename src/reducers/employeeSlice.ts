@@ -1,7 +1,7 @@
 import {createEntityAdapter, createSlice} from '@reduxjs/toolkit';
 import {Employee} from 'types/employees';
-import {initializeEmployee} from 'actions/employee';
 import {State} from 'types';
+import {initializeEmployee} from 'actions/employee';
 
 export const MESSAGE_ERROR = 'Что-то пошло не так...';
 
@@ -16,7 +16,7 @@ export const initialState = employeesAdapter.getInitialState<{status: string; er
 
 export const employeeSlice = createSlice({
   name: 'employee',
-  initialState: initialState,
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder

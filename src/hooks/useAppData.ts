@@ -1,6 +1,6 @@
-import {actions} from 'reducers/employeeSlice';
-import {State} from 'types';
 import {useDispatch, useSelector} from 'react-redux';
+import {State} from 'types';
+import {actions} from 'reducers/employeeSlice';
 import {useEffect} from 'react';
 
 export default function useAppData () {
