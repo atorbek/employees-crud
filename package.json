@@ -1,11 +1,13 @@
 {
   "dependencies": {
+    "@chakra-ui/react": "^2.7.1",
     "@reduxjs/toolkit": "^1.7.2",
-    "@chakra-ui/react": "^2.7.1"
+    "@emotion/react": "^11.11.1",
+    "react-icons": "^4.10.1"
   },
   "engines": {
-    "node": "v18.6.0",
-    "npm": "8.13.2"
+    "node": "v16.13.1",
+    "npm": "8.1.2"
   },
   "description": "Object links visualizer",
   "devDependencies": {

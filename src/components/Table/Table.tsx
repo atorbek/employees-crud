@@ -1,15 +1,19 @@
 import {
   Table as ChakraTable,
+  Icon,
+  IconButton,
   TableCaption,
   TableContainer,
   Tbody,
   Td,
   Tfoot,
   Th,
-  Thead,
-  Tr
+  Thead
+  , Tr
 } from '@chakra-ui/react';
 import React, {FC} from 'react';
+import {MdOutlineModeEditOutline} from 'react-icons/md';
+import {IoIosClose} from 'react-icons/io';
 import {Props} from './types';
 
 const Table: FC<Props> = ({employees}) => {
@@ -19,21 +23,44 @@ const Table: FC<Props> = ({employees}) => {
     return (
       <Tr key={employeeId}>
         {Object.keys(employee).map((prop, i) => <Td key={i}>{employee[prop]}</Td>)}
+        <Td>
+          <IconButton
+            isRound={true}
+            size='sm'
+            variant='outline'
+            aria-label='Done'
+            fontSize='20px'
+            colorScheme="orange"
+            mr="5px"
+            icon={<Icon as={MdOutlineModeEditOutline} />}
+          />
+          <IconButton
+            isRound={true}
+            size='sm'
+            variant='outline'
+            aria-label='Done'
+            fontSize='20px'
+            colorScheme="red"
+            icon={<Icon as={IoIosClose} />}
+          />
+          </Td>
       </Tr>
     );
   };
 
   const renderHead = () => {
-    const employee = employees.entities[0];
+    const employeeId = employees.ids[0];
+    const employee = employees.entities[employeeId];
 
     if (employee) {
-      return Object.keys(employee[0])
-        .map((prop, i) => <Th key={i}>{prop}</Th>);
+      return Object.keys(employee)
+        .map((prop, i) => <Th key={i}>{prop}</Th>)
     }
   };
 
   const renderBody = () => {
-    return employees.ids.map(renderRow);
+    return employees.ids
+      .map(renderRow);
   };
 
   return (
@@ -42,6 +69,7 @@ const Table: FC<Props> = ({employees}) => {
         <TableCaption>Employees</TableCaption>
         <Thead>
           {renderHead()}
+          <Th>Actions</Th>
         </Thead>
         <Tbody>
           {renderBody()}

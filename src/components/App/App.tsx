@@ -1,7 +1,9 @@
-import {Center, Spinner} from '@chakra-ui/react';
+import {Button, Center, HStack, Icon, IconButton, Input, Spinner, Stack, VStack} from '@chakra-ui/react';
 import React, {FC} from 'react';
 import Table from 'components/Table';
 import useAppData from 'hooks/useAppData';
+import { IoIosAdd } from 'react-icons/io';
+
 
 const App: FC = () => {
   const employees = useAppData();
@@ -32,8 +34,26 @@ const App: FC = () => {
   }
 
   return (
-    <Table employees={employees}/>
-  );
+    <VStack 
+    mt="20px"
+    spacing={4}
+    align='center'
+    >
+      <HStack spacing={4}>
+        <IconButton
+          isRound={true}
+          size='sm'
+          variant='outline'
+          aria-label='Done'
+          fontSize='20px'
+          colorScheme="green"
+          icon={<Icon as={IoIosAdd} />}
+        />
+        <Input placeholder='Basic usage' size="sm" borderRadius="full" />
+      </HStack>
+      <Table employees={employees} />
+    </VStack>
+);
 };
 
 export default App;
