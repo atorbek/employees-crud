@@ -4,8 +4,8 @@ import {WrappedStateObjects} from 'types';
 const APP_NAME = 'employees-crud';
 
 const getData = (): WrappedStateObjects<Employee> => {
-  const lsdata = localStorage.getItem(APP_NAME) || '{}';
-  return JSON.parse(lsdata);
+  const lsData = localStorage.getItem(APP_NAME) || '{}';
+  return JSON.parse(lsData);
 };
 
 const setData = (employees: Employees) => {

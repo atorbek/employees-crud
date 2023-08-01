@@ -1,7 +1,6 @@
 import {createEntityAdapter, createSlice} from '@reduxjs/toolkit';
+import {deleteEmployee, initializeEmployee} from 'actions/employee';
 import {Employee} from 'types/employees';
-import {State} from 'types';
-import {initializeEmployee} from 'actions/employee';
 
 export const MESSAGE_ERROR = 'Что-то пошло не так...';
 
@@ -32,17 +31,13 @@ export const employeeSlice = createSlice({
         if (action.payload?.error) {
           state.error = action.payload?.error;
         }
+      })
+      .addCase(deleteEmployee.fulfilled, (state, action) => {
+        employeesAdapter.removeOne(state, action.payload);
       });
   }
 });
 
 export default employeeSlice.reducer;
 
-export const actions = {...employeeSlice.actions, initializeEmployee};
-
-export const {
-  selectAll: selectAllEmployees,
-  selectById: selectEmployeeById,
-  selectIds: selectEmployeeIds
-
-} = employeesAdapter.getSelectors((state: State) => state.employees);
+export const actions = {...employeeSlice.actions, initializeEmployee, deleteEmployee};

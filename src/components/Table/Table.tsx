@@ -16,8 +16,16 @@ import React, {FC} from 'react';
 import {IoIosClose} from 'react-icons/io';
 import {MdOutlineModeEditOutline} from 'react-icons/md';
 import {Props} from './types';
+import {actions} from 'reducers/employeeSlice';
+import {useDispatch} from 'react-redux';
 
 const Table: FC<Props> = ({employees}) => {
+  const dispatch = useDispatch();
+
+  const handleDeleteEmployee = (id: string) => () => {
+    dispatch(actions.deleteEmployee(id));
+  };
+
   const renderRow = (employeeId: string) => {
     const employee = employees.entities[employeeId];
 
@@ -46,6 +54,7 @@ const Table: FC<Props> = ({employees}) => {
               isRound={true}
               size='sm'
               variant='outline'
+              onClick={handleDeleteEmployee(employeeId)}
             />
           </Tooltip>
 
