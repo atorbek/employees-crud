@@ -8,14 +8,35 @@ import {
   Tooltip,
   VStack
 } from '@chakra-ui/react';
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
+import {IoIosAdd} from 'react-icons/io';
+import Modal from 'components/Modal';
 import Table from 'components/Table';
 import useAppData from 'hooks/useAppData';
-import { IoIosAdd } from 'react-icons/io';
-
 
 const App: FC = () => {
   const employees = useAppData();
+
+  const [isModal, setIsModal] = useState(false);
+
+  const openModal = () => {
+    setIsModal(true);
+  };
+
+  const handleClose = () => {
+    setIsModal(false);
+  };
+
+  const renderModal = () => {
+    if (isModal) {
+      return (
+        <Modal
+          isOpen={isModal}
+          onClose={handleClose}
+        />
+      );
+    }
+  };
 
   if (employees.status === 'reject') {
     return (
@@ -43,28 +64,35 @@ const App: FC = () => {
   }
 
   return (
-    <VStack 
-    mt="20px"
-    spacing={4}
-    align='center'
-    >
-      <HStack spacing={2}>
-        <Tooltip label='Add employee'>
-        <IconButton
-          isRound={true}
-          size='sm'
-          variant='outline'
-          aria-label='Done'
-          fontSize='20px'
-          colorScheme="green"
-          icon={<Icon as={IoIosAdd} />}
-        />
-        </Tooltip>
-        <Input placeholder='Search by name' size="sm" borderRadius="full" />
-      </HStack>
-      <Table employees={employees} />
-    </VStack>
-);
+    <>
+      {renderModal()}
+      <VStack
+        align='center'
+        mt="20px"
+        spacing={4}
+      >
+        <HStack spacing={2}>
+          <Tooltip label='Add employee'>
+            <IconButton
+              aria-label='Done'
+              colorScheme="green"
+              fontSize='20px'
+              icon={<Icon as={IoIosAdd} />}
+              isRound={true}
+              size='sm'
+              variant='outline'
+              onClick={openModal}
+            />
+          </Tooltip>
+          <Input
+            borderRadius="full"
+            placeholder='Search by name'
+            size="sm" />
+        </HStack>
+        <Table employees={employees} />
+      </VStack>
+    </>
+  );
 };
 
 export default App;

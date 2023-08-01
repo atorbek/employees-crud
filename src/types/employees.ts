@@ -1,4 +1,3 @@
-
 export type Employee = {
   employeeId: number;
   firstName: string;
