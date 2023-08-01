@@ -9,14 +9,13 @@ import {
   Tfoot,
   Th,
   Thead
+  , Tooltip
   , Tr
 } from '@chakra-ui/react';
 import React, {FC} from 'react';
-import {MdOutlineModeEditOutline} from 'react-icons/md';
 import {IoIosClose} from 'react-icons/io';
+import {MdOutlineModeEditOutline} from 'react-icons/md';
 import {Props} from './types';
-import { Tooltip } from '@chakra-ui/react'
-
 
 const Table: FC<Props> = ({employees}) => {
   const renderRow = (employeeId: string) => {
@@ -27,30 +26,30 @@ const Table: FC<Props> = ({employees}) => {
         {Object.keys(employee).map((prop, i) => <Td key={i}>{employee[prop]}</Td>)}
         <Td>
           <Tooltip label='Edit employee'>
-          <IconButton
-            isRound={true}
-            size='sm'
-            variant='outline'
-            aria-label='Done'
-            fontSize='20px'
-            colorScheme="orange"
-            mr="5px"
-            icon={<Icon as={MdOutlineModeEditOutline} />}
-          />
+            <IconButton
+              aria-label='Done'
+              colorScheme="orange"
+              fontSize='20px'
+              icon={<Icon as={MdOutlineModeEditOutline} />}
+              isRound={true}
+              mr="5px"
+              size='sm'
+              variant='outline'
+            />
           </Tooltip>
           <Tooltip label='Delete employee'>
             <IconButton
+              aria-label='Done'
+              colorScheme="red"
+              fontSize='20px'
+              icon={<Icon as={IoIosClose} />}
               isRound={true}
               size='sm'
               variant='outline'
-              aria-label='Done'
-              fontSize='20px'
-              colorScheme="red"
-              icon={<Icon as={IoIosClose} />}
             />
           </Tooltip>
-         
-          </Td>
+
+        </Td>
       </Tr>
     );
   };
@@ -61,7 +60,7 @@ const Table: FC<Props> = ({employees}) => {
 
     if (employee) {
       return Object.keys(employee)
-        .map((prop, i) => <Th key={i}>{prop}</Th>)
+        .map((prop, i) => <Th key={i}>{prop}</Th>);
     }
   };
 
@@ -75,15 +74,19 @@ const Table: FC<Props> = ({employees}) => {
       <ChakraTable size='sm'>
         <TableCaption>Employees</TableCaption>
         <Thead>
-          {renderHead()}
-          <Th>Actions</Th>
+          <Tr>
+            {renderHead()}
+            <Th>Actions</Th>
+          </Tr>
         </Thead>
         <Tbody>
           {renderBody()}
         </Tbody>
         <Tfoot>
-          {renderHead()}
-          <Th>Actions</Th>
+          <Tr>
+            {renderHead()}
+            <Th>Actions</Th>
+          </Tr>
         </Tfoot>
       </ChakraTable>
     </TableContainer>
