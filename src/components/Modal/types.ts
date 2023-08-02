@@ -4,8 +4,9 @@ import {Employee} from 'types/employees';
 export type Props = {
   className?: string;
   style?: CSSProperties;
-  employee?: Employee | null;
+  employee: Employee;
   isOpen: boolean;
+  onSave: (employee: Employee) => void;
   onClose: () => void
 };
 

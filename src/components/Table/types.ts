@@ -6,6 +6,7 @@ export type Props = {
   className?: string;
   style?: CSSProperties;
   employees: WrappedStateObjects<Employee>;
+  onUpdateEmployee: (employee: Employee) => void
 };
 
 export type State = {};

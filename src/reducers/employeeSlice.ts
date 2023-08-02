@@ -1,5 +1,10 @@
+import {
+  addEmployee,
+  deleteEmployee,
+  initializeEmployee,
+  updateEmployee
+} from 'actions/employee';
 import {createEntityAdapter, createSlice} from '@reduxjs/toolkit';
-import {deleteEmployee, initializeEmployee} from 'actions/employee';
 import {Employee} from 'types/employees';
 
 export const MESSAGE_ERROR = 'Что-то пошло не так...';
@@ -16,7 +21,20 @@ export const initialState = employeesAdapter.getInitialState<{status: string; er
 export const employeeSlice = createSlice({
   name: 'employee',
   initialState,
-  reducers: {},
+  reducers: {
+    deleteEmployeeReject: (state, action) => {
+      state.status = 'asyncReject';
+      employeesAdapter.addOne(state, action.payload);
+    },
+    addEmployeeReject: (state, action) => {
+      state.status = 'asyncReject';
+      employeesAdapter.removeOne(state, action.payload);
+    },
+    updateEmployeeReject: (state, action) => {
+      state.status = 'asyncReject';
+      state.entities[action.payload.employeeId] = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(initializeEmployee.fulfilled, (state, action) => {
@@ -33,11 +51,25 @@ export const employeeSlice = createSlice({
         }
       })
       .addCase(deleteEmployee.fulfilled, (state, action) => {
+        state.status = 'succeeded';
         employeesAdapter.removeOne(state, action.payload);
+      })
+      .addCase(addEmployee.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        employeesAdapter.addOne(state, action.payload);
+      })
+      .addCase(updateEmployee.fulfilled, (state, action) => {
+        state.entities[action.payload.employeeId] = action.payload;
       });
   }
 });
 
 export default employeeSlice.reducer;
 
-export const actions = {...employeeSlice.actions, initializeEmployee, deleteEmployee};
+export const actions = {
+  ...employeeSlice.actions,
+  initializeEmployee,
+  deleteEmployee,
+  addEmployee,
+  updateEmployee
+};

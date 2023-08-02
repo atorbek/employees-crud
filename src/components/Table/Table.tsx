@@ -8,9 +8,9 @@ import {
   Td,
   Tfoot,
   Th,
-  Thead
-  , Tooltip
-  , Tr
+  Thead,
+  Tooltip,
+  Tr
 } from '@chakra-ui/react';
 import React, {FC} from 'react';
 import {IoIosClose} from 'react-icons/io';
@@ -19,11 +19,16 @@ import {Props} from './types';
 import {actions} from 'reducers/employeeSlice';
 import {useDispatch} from 'react-redux';
 
-const Table: FC<Props> = ({employees}) => {
+const Table: FC<Props> = ({employees, onUpdateEmployee}) => {
   const dispatch = useDispatch();
 
   const handleDeleteEmployee = (id: string) => () => {
+    // @ts-ignore
     dispatch(actions.deleteEmployee(id));
+  };
+
+  const handleUpdateEmployee = (id: string) => () => {
+    onUpdateEmployee(employees.entities[id]);
   };
 
   const renderRow = (employeeId: string) => {
@@ -43,6 +48,7 @@ const Table: FC<Props> = ({employees}) => {
               mr="5px"
               size='sm'
               variant='outline'
+              onClick={handleUpdateEmployee(employeeId)}
             />
           </Tooltip>
           <Tooltip label='Delete employee'>

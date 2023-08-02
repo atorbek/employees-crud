@@ -1,4 +1,6 @@
 import {
+  Alert,
+  AlertIcon,
   Center,
   HStack,
   Icon,
@@ -6,34 +8,75 @@ import {
   Input,
   Spinner,
   Tooltip,
-  VStack
+  VStack,
+  useDisclosure
 } from '@chakra-ui/react';
 import React, {FC, useState} from 'react';
+import {Employee} from 'types/employees';
 import {IoIosAdd} from 'react-icons/io';
 import Modal from 'components/Modal';
 import Table from 'components/Table';
+import {actions} from 'reducers/employeeSlice';
 import useAppData from 'hooks/useAppData';
+import {useDispatch} from 'react-redux';
 
 const App: FC = () => {
+  const dispatch = useDispatch();
   const employees = useAppData();
 
-  const [isModal, setIsModal] = useState(false);
+  const [employee, setEmployee] = useState({
+    firstName: '',
+    lastName: '',
+    birthday: '',
+    height: 0,
+    employeeId: 0
+  });
 
-  const openModal = () => {
-    setIsModal(true);
+  const {isOpen, onOpen, onClose} = useDisclosure();
+
+  const [actionType, setActionType] = useState<'add' | 'update'>('add');
+
+  const handleSave = (employee: Employee) => {
+    if (actionType === 'add') {
+      // @ts-ignore
+      dispatch(actions.addEmployee(employee));
+    } else if (actionType === 'update') {
+      // @ts-ignore
+      dispatch(actions.updateEmployee(employee));
+    }
+
+    onClose();
   };
 
-  const handleClose = () => {
-    setIsModal(false);
+  const handleAddEmployee = () => {
+    setActionType('add');
+    onOpen();
+  };
+
+  const handleUpdateEmployee = (employee: Employee) => {
+    setEmployee(employee);
+    setActionType('update');
+    onOpen();
   };
 
   const renderModal = () => {
-    if (isModal) {
+    return (
+      <Modal
+        employee={employee}
+        isOpen={isOpen}
+        onClose={onClose}
+        onSave={handleSave}
+      />
+    );
+  };
+
+  const renderAlertError = () => {
+    if (employees.status === 'asyncReject') {
       return (
-        <Modal
-          isOpen={isModal}
-          onClose={handleClose}
-        />
+        <Alert status='error'>
+          <AlertIcon />
+          Something wrong with employees actions..
+        </Alert>
       );
     }
   };
@@ -81,15 +124,19 @@ const App: FC = () => {
               isRound={true}
               size='sm'
               variant='outline'
-              onClick={openModal}
+              onClick={handleAddEmployee}
             />
           </Tooltip>
           <Input
             borderRadius="full"
             placeholder='Search by name'
-            size="sm" />
+            size="sm"
+          />
         </HStack>
-        <Table employees={employees} />
+        {renderAlertError()}
+        <Table
+          employees={employees}
+          onUpdateEmployee={handleUpdateEmployee}/>
       </VStack>
     </>
   );

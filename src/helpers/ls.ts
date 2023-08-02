@@ -22,11 +22,11 @@ const setData = (employees: Employees) => {
   localStorage.setItem(APP_NAME, JSON.stringify(normalizedData));
 };
 
-const addEmployeeById = (id: string, employee: Employee) => {
+const addEmployee = (employee: Employee) => {
   const data = getData();
 
-  data.entities[id] = employee;
-  data.ids.push(id);
+  data.entities[employee.employeeId] = employee;
+  data.ids.push(`${employee.employeeId}`);
 
   localStorage.setItem(APP_NAME, JSON.stringify(data));
 };
@@ -36,15 +36,15 @@ const deleteEmployeeById = (id: string) => {
 
   if (data.entities[id]) {
     delete data.entities[id];
-    data.ids.filter(eId => eId !== id);
+    data.ids = data.ids.filter((eId) => eId !== `${id}`);
   }
 
   localStorage.setItem(APP_NAME, JSON.stringify(data));
 };
 
-const updateEmployeeById = (id: string, employee: Employee) => {
+const updateEmployee = (employee: Employee) => {
   const data = getData();
-  data.entities[id] = employee;
+  data.entities[employee.employeeId] = employee;
 
   localStorage.setItem(APP_NAME, JSON.stringify(data));
 };
@@ -52,7 +52,7 @@ const updateEmployeeById = (id: string, employee: Employee) => {
 export default {
   getData,
   setData,
-  addEmployeeById,
-  deleteEmployeeById,
-  updateEmployeeById
+  addEmployee,
+  updateEmployee,
+  deleteEmployeeById
 };

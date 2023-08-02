@@ -10,7 +10,7 @@ import theme from './theme';
 
 const container = document.getElementById('root');
 const root = createRoot(container!);
-const store = configureStore(defaultGetState());
+export const store = configureStore(defaultGetState());
 
 root.render(
   <Provider store={store}>
